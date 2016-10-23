@@ -71,13 +71,13 @@ It's often the case that you want to have Dovecot behave in the way you want (eg
     
 2. Copy over some default configuration files:
     ```
-    $ cp -pr /usr/local/Cellar/dovecot/2.2.25/share/doc/dovecot/example-config /usr/local/etc/dovecot
+    $ sudo cp -r /usr/local/Cellar/dovecot/2.2.25/share/doc/dovecot/example-config/* /usr/local/etc/dovecot
     ```
-    Note that this will make a copy of dovecot.conf and other files into `/usr/local/etc/dovecot` where Dovecot looks for configuration file `dovecot.conf` when start running. 
+    Note that this will make a copy of `dovecot.conf` and other files into `/usr/local/etc/dovecot` where Dovecot looks for configuration file `dovecot.conf` when start running. 
     
 3. Add a `local.conf` file `/usr/local/etc/dovecot/local.conf` with all our own settings. `dovecot.conf` will include that file if it exists.
 
-    Here we follow our settings for a local only IMAP server with a static password that can be used with an arbitrary username.
+    Here we follow our settings for a local only IMAP server with system user authentication.
     
     Make sure to replace all instances of CHANGE_THIS with your own information.
     
@@ -90,15 +90,6 @@ It's often the case that you want to have Dovecot behave in the way you want (eg
 
     # Protocols we want to be serving.
     protocols = imap
-
-    # Static passdb.
-
-    # This can be used for situations where Dovecot doesn't need to verify the
-    # username or the password, or if there is a single password for all users:
-    passdb {
-    driver = static
-    args = password=CHANGE_THIS_to_whatever_password_you_like
-    }
 
     # Location for users' mailboxes. The default is empty, which means that Dovecot
     # tries to find the mailboxes automatically. This won't work if the user
@@ -148,16 +139,18 @@ It's often the case that you want to have Dovecot behave in the way you want (eg
     default_process_limit = 10
     default_client_limit = 50
     ```
-Note that here we use mbox format emails. And mail collection (you'll get mail collection in then next section) should go to "/CHANGE_THIS_to_the_path_where_you_want_to_store_the_mail/".
+Note that here we use mbox format emails. And mail collection (you'll get mail collection in the next section) should go to "/CHANGE_THIS_to_the_path_where_you_want_to_store_the_mail/".
 
-4. There are two changes needed to the default conf files as well.
-
-* File: `/usr/local/etc/dovecot/conf.d/10-auth.conf`
-
-    Comment out the line that includes the default auth settings like this:
+4. Create PAM file `/etc/pam.d/dovecot` to use system user authentication for email account verification. Copy the following in file `/etc/pam.d/dovecot`:
     ```
-    #!include auth-system.conf.ext
+    auth       required       pam_opendirectory.so try_first_pass
+    account    required       pam_nologin.so
+    account    required       pam_opendirectory.so
+    password   required       pam_opendirectory.so
     ```
+
+5. There are some changes needed to the default conf files as well.
+
 * File: `/usr/local/etc/dovecot/conf.d/10-ssl.conf`
     
     Comment out the lines that tries to read the non existent SSL cert and key:
@@ -256,13 +249,14 @@ Point mail_location in file `/usr/local/etc/dovecot/local.conf` to the converted
 
 2. Select "Add Other Mail Account" in the pop-up window, then click "Continue".
 
+3. Enter the information for the account, Full Name as you want, Email Address (here please use system user as username, system_username@localhost for example), Password being system user password used for computer login. Click "Create", then "Next" to manually configure.
 
-3. Enter the information for the account, Full Name as you want, Email Address (username@localhost for example), Password being the password you set in file `/usr/local/etc/dovecot/local.conf`. Click "Create", then "Next" to manually configure.
+4. Under IMAP, type localhost as Mail Server, type system user name as User Name, Password being system user password used for computer login. Click "Next". "Continue" on without a secured password. Click "Next". 
 
-4. Under IMAP, type localhost as Mail Server, type any username as User Name, Password being the password you set in file `/usr/local/etc/dovecot/local.conf`. Click "Next".
+5. For Incoming Mail Server Info, leave Path Prefix empty, SSL unchecked (Port left as 143), Authentication selected as "Password". Click "Next".
 
-5. Type localhost as SMTP Server, leave User Name and Password empty because we're not using Apple Mail to send emails for this account, just some toy data should be fine.
+6. For Outgoing Mail Server Info, type localhost as SMTP Server, leave User Name and Password empty because we're not using Apple Mail to send emails for this account, just some toy data should be fine.
 
-6. Click "Create", and you should be able to see all the Enron emails as labeled emails for account username@localhost on the bottom left of Apple Mail. 
+7. Click "Create", and you should be able to see all the Enron emails as labeled emails for account system_username@localhost on the bottom left of Apple Mail. 
 
-7. You're good to go!
+8. You're good to go!
