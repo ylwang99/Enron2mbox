@@ -66,10 +66,7 @@ It's often the case that you want to have Dovecot behave in the way you want (eg
     ```
     $ brew info dovecot
     ```
-    Look for the line that contains "Cellar", in my case, it's 
-    ```
-    /usr/local/Cellar/dovecot/2.2.25
-    ```
+    Look for the line that contains "Cellar", in my case, it's `/usr/local/Cellar/dovecot/2.2.25`.
     Default configuration files are then located in `/usr/local/Cellar/dovecot/2.2.25/share/doc/dovecot/example-config`
     
 2. Copy over some default configuration files:
