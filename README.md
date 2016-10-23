@@ -256,7 +256,7 @@ Point mail_location in file `/usr/local/etc/dovecot/local.conf` to the converted
 
 2. Select "Add Other Mail Account" in the pop-up window, then click "Continue".
 
-3. Enter the information for the account, Full Name as you want, Email Address (here please use system user as username, system_username@localhost for example), Password being system user password used for computer login. Click "Create", then "Next" to manually configure.
+3. Enter the information for the account, Full Name as you want, Email Address (here please use system user as username, use any email domain name, system_username@localhost for example), Password being system user password used for computer login. Click "Create", then "Next" to manually configure.
 
 4. Under IMAP, type localhost as Mail Server, type system user name as User Name, Password being system user password used for computer login. Click "Next". "Continue" on without a secured password. Click "Next". 
 
