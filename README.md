@@ -27,7 +27,7 @@ Dovecot is an open source IMAP and POP3 email server for Linux/UNIX-like systems
     ```
    $ brew info openssl
     ```
-    And you'll find in the last three lines LDFLAGS, CPPFLAGS paths. Write them down somewhere. In my case, it's 
+    You will find in the last three lines LDFLAGS, CPPFLAGS paths. Write them down somewhere. In my case, it's 
     ```
     LDFLAGS:  -L/usr/local/opt/openssl/lib
     CPPFLAGS: -I/usr/local/opt/openssl/include
@@ -141,7 +141,7 @@ It's often the case that you want to have Dovecot behave in the way you want (eg
     ```
 Note that here we use mbox format emails. And mail collection (you'll get mail collection in the next section) should go to "/CHANGE_THIS_to_the_path_where_you_want_to_store_the_mail/".
 
-4. Create PAM file `/etc/pam.d/dovecot` to use system user authentication for email account verification. Copy the following in file `/etc/pam.d/dovecot`:
+4. Create PAM file `/etc/pam.d/dovecot` to use system user authentication for email account verification. Copy the following into file `/etc/pam.d/dovecot`:
     ```
     auth       required       pam_opendirectory.so try_first_pass
     account    required       pam_nologin.so
