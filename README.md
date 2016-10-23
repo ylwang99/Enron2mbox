@@ -159,6 +159,13 @@ Note that here we use mbox format emails. And mail collection (you'll get mail c
     #ssl_key = </etc/ssl/private/dovecot.pem
     ```
     
+* File `/usr/local/etc/dovecot/conf.d/10-mail.conf`
+
+    Uncomment the line that locks write permission:
+    ```
+    mbox_write_locks = dotlock fcntl
+    ```
+    
 # Running Dovecot
 
 1. Run the server:
