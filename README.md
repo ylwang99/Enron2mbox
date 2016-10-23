@@ -37,8 +37,7 @@ Dovecot is an open source IMAP and POP3 email server for Linux/UNIX-like systems
 5. Compile Dovecot:
     ```
     $ ./autogen.sh
-    $ CPPFLAGS="-I/usr/local/opt/opensslinclude" \
-    LDFLAGS="-L/usr/local/opt/openssl/lib" \
+    $ CPPFLAGS="-I/usr/local/opt/opensslinclude" LDFLAGS="-L/usr/local/opt/openssl/lib" \
     ./configure --enable-maintainer-mode
     $ make
     $ sudo make install
