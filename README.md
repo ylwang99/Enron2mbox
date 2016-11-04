@@ -29,7 +29,7 @@
     ```
     This script: 
     * Mark all the emails as read (by appending each message filename with `:2,S`. For more details about the flags, refer [here](http://cr.yp.to/proto/maildir.html)).
-    * Change the root user's access to the email collection to only lookup and read (by adding a `dovecot-acl` file into each folder. For more details about Dovecot Access Control Lists (ACL), refer [here](http://wiki2.dovecot.org/ACL)).
+    * Change the owner's access to the email collection to only lookup and read (by adding a `dovecot-acl` file into each folder. For more details about Dovecot Access Control Lists (ACL), refer [here](http://wiki2.dovecot.org/ACL)).
     
     Note that the script is destructive, in that it alters the original structure of the dataset. This is necessary to get everything in the right maildir format (in particular, the script creates cur/, new/ and tmp/ directories, which is part of the expected layout).
 
