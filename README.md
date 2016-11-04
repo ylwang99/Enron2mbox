@@ -80,6 +80,8 @@ It's often the case that you want to have Dovecot behave in the way you want (eg
     
 ### Running Dovecot
 
+First make sure that port 143 is open for listening.
+
 1. Start the server:
     ```
     $ dovecot
