@@ -19,12 +19,12 @@
 
 4. Move `maildir` to our project repo:
     ```
-    $ mv maildir Enron2mbox
+    $ mv maildir/ Enron2mbox/
     ```
 
 5. Get into the repo and run the format script:
     ```
-    $ cd Enron2mbox
+    $ cd Enron2mbox/
     $ ./format_enron.py
     ```
     This script: 
@@ -102,29 +102,27 @@ I've got a Amazon EC2 Linux instance to run, so you can skip the "Get Server to 
 
 2. Select "Add Other Mail Account" in the pop-up window, then click "Continue".
 
-3. Enter the information for the account, Full Name as you want, Email Address `ec2-user@35.162.34.219`, Password `dovecot`. Click "Create", then "Next" to manually configure.
+3. Enter the information for the account, Full Name as you want, Email Address `ec2-user@35.162.97.62`, Password `dovecot`. Click "Create", then "Next" to manually configure.
 
-4. Under IMAP, type `35.162.34.219` as Mail Server, `ec2-user` as User Name, `dovecot` as Password. Click "Next".
+4. Under IMAP, type `35.162.97.62` as Mail Server, `ec2-user` as User Name, `dovecot` as Password. Click "Next". "Connect" anyway if it warns you about some certificate issues.
 
-5. For Incoming Mail Server Info, leave Path Prefix empty, SSL unchecked (Port left as 143), Authentication selected as "Password". Click "Next".
+5. For Outgoing Mail Server Info, type `35.162.97.62` as SMTP Server, leave User Name and Password empty because we're not using Apple Mail to send emails for this account, and just some toy data should be fine. Should it prompt to ask you for additional information about Outgoing Mail Server Info, just type something that's working.
 
-6. For Outgoing Mail Server Info, type `35.162.34.219` as SMTP Server, leave User Name and Password empty because we're not using Apple Mail to send emails for this account, and just some toy data should be fine.
+6. Click "Create", and you should be able to see all the Enron emails as labeled emails for account `ec2-user@35.162.97.62` on the bottom left of Apple Mail. 
 
-7. Click "Create", and you should be able to see all the Enron emails as labeled emails for account `ec2-user@35.162.34.219` on the bottom left of Apple Mail. 
-
-8. You're good to go!
+7. You're good to go!
 
 ### Thunderbird
 1. In Thunderbird, go to the main page, and select "create a new email account".
 
-2. Enter the information for the account, Full Name as you want, Email Address `ec2-user@35.162.34.219`, Password `dovecot`. Click "Continue", then "Manual config" to manually configure.
+2. Enter the information for the account, Full Name as you want, Email Address `ec2-user@35.162.97.62`, Password `dovecot`. Click "Continue", then "Manual config" to manually configure.
 
-3. For Incoming, type `35.162.34.219` as Server hostname, select `143` as Port number.
+3. For Incoming, type `35.162.97.62` as Server hostname, select `143` as Port number.
 
-4. For Outgoing, choose a working Server hostname (e.g., smtp.gmail.com). `35.162.34.219` is not working at the moment because it's not a SMTP server yet.
+4. For Outgoing, choose a working Server hostname (e.g., smtp.gmail.com). `35.162.97.62` is not working at the moment because it's not a SMTP server yet.
 
-5. Click on "Re-test", and you should see the Button "Done" enabled. Click "Done". Now the account `ec2-user@35.162.34.219` should be displayed on the left panel.
+5. Click on "Re-test", and you should see the Button "Done" enabled. Click "Done". "Confirm Security Exception" if it warns you about some certificate issue. Now the account `ec2-user@35.162.97.62` should be displayed on the left panel.
 
-6. Right click on account `ec2-user@35.162.34.219`, select "Subscribe...", and you get to choose what mailboxes you want to subscribe.
+6. Right click on account `ec2-user@35.162.97.62`, select "Subscribe...", and you get to choose what mailboxes you want to subscribe.
 
 7. You're good to go!
