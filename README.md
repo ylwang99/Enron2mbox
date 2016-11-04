@@ -10,6 +10,8 @@
     ```
 
 2. Download the [Enron Email Dataset](https://www.cs.cmu.edu/~./enron/) dataset, specifically, the [May 7, 2015 Version of dataset](https://www.cs.cmu.edu/~./enron/enron_mail_20150507.tgz). This dataset is distributed in [maildir](https://en.wikipedia.org/wiki/Maildir) format, which means that each message is stored in a separate file.
+
+Here is how you can perform the download in the terminal:
     ```
     $ wget https://www.cs.cmu.edu/~./enron/enron_mail_20150507.tgz
     ```
