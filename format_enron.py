@@ -9,6 +9,7 @@ import shutil
 
 folders = []
 
+file_subscription = open("maildir/subscriptions","a+")
 # traverse root directory, and list directories as dirs and files as files
 for root, dirs, files in os.walk("maildir"):
   if files or dirs:
@@ -27,6 +28,11 @@ for root, dirs, files in os.walk("maildir"):
         # mark message read
         shutil.move(file, file + ":2,S")
         shutil.move(file + ":2,S", folder + "/cur")
+      folder = root[8:]
+      if len(folder) > 0:
+      	file_subscription.write(folder + "\n")
+file_subscription.close()
+
 
 if os.path.exists("maildir/cur"):
   os.rmdir("maildir/cur")
