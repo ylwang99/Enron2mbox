@@ -267,9 +267,9 @@ If you want to skip all the troublesome, I've set up the Roundcube on a Amazon L
     	mysql> create database roundcubedb;
     	```
     * Create MySQL user for access  Roundcube Webmail, for example: `usercube`
-		```
-		mysql> create user usercube;
-		```
+	```
+	mysql> create user usercube;
+	```
     * Give user `usercube` a password `usercube`:
 		```
 		mysql> set password for 'usercube' = password('usercube');
