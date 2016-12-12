@@ -220,21 +220,21 @@ If you want to skip all the troublesome, I've set up the Roundcube on a Amazon L
 
 ### Install LAMP
 
-1. Connect to your instance, make sure that your instance has the port 80 (HTTP) open.
+1. Connect to your instance, make sure that your instance has the port 80 (HTTP) open (by modifying the security group this instance is bounded to).
 
 2. Make sure the software packages are up to date:
-    ```
+	```
     $ sudo yum update -y
     ```
 3. Install the Apache web server, MySQL, and PHP software packages:
-    ```
-    $ sudo yum install -y httpd24 php56 mysql55-server php56-mysqlnd php56-mbstring
-    ```
+	```
+	$ sudo yum install -y httpd24 php56 mysql55-server php56-mysqlnd php56-mbstring
+	```
 4. Start the Apache web server:
     ```
     $ sudo service httpd start
     ```
-    Test your web server. In a web browser, enter the public DNS address (or the public IP address) of your instance; you should see the Apache test page.
+    To test your web server, in a web browser, enter the public DNS address (or the public IP address) of your instance, you should see the Apache test page.
 
 5. Start the MySQL server:
     ```
@@ -245,9 +245,7 @@ If you want to skip all the troublesome, I've set up the Roundcube on a Amazon L
     ```
     $ sudo mysql_secure_installation
     ```
-    * When prompted, enter a password for the root account.
-
-    * Enter the current root password. By default, the root account does not have a password set, so press Enter.
+    * When prompted, it asks to enter a password for the root account. Because by default, the root account does not have a password set, so press Enter.
 
     * Type Y to set a password, and enter a secure password twice.
 
@@ -260,30 +258,30 @@ If you want to skip all the troublesome, I've set up the Roundcube on a Amazon L
     * Type Y to reload the privilege tables and save your changes.
     
 7. To create a MySQL Database & User:
-    * Open the terminal and run this command to log in to MySQL server (use the MySQL password you have entered during the installation of the LAMP Server):
-        ```
-        $ mysql -u root -p
-        ```
+    * Open the terminal and run the following command to log in to MySQL server (use the MySQL password you have entered during the installation of the LAMP Server):
+    	```
+   		$ mysql -u root -p
+		```
     * Create a database for Roundcube Webmail, for example: `roundcubedb`
-        ```
-        mysql> create database roundcubedb;
-        ```
+    	```
+    	mysql> create database roundcubedb;
+    	```
     * Create MySQL user for access  Roundcube Webmail, for example: `usercube`
-        ```
-        mysql> create user usercube;
-        ```
+		```
+		mysql> create user usercube;
+		```
     * Give user `usercube` a password `usercube`:
-        ```
-        mysql> set password for 'usercube' = password('usercube');
-        ```
+		```
+		mysql> set password for 'usercube' = password('usercube');
+		```
     * Set  privileges usercube to access database roundcubedb:
-        ```
-        mysql> grant all privileges on roundcubedb.* to 'usercube' identified by 'usercube';
-        ```
+		```
+		mysql> grant all privileges on roundcubedb.* to 'usercube' identified by 'usercube';
+		```
     * Exit from MySQL:
-        ```
-        mysql> exit
-        ```
+		```
+		mysql> exit
+		```
    
 ### Install Roundcube
 
@@ -302,7 +300,7 @@ If you want to skip all the troublesome, I've set up the Roundcube on a Amazon L
 4. Because the Amazon Linux Apache document root is `/var/www/html`, so let's move `webmail` to `/var/www/html`
 
 5. To configure Roundcube, in a browser, open `http://my.public.dns.amazonaws.com/webmail/installer`.
-    * Under `Check environment` you should see several OKs except for a few NOT AVAILABLE which we don't actually care. You might see `date.timezone:  NOT OK(not set)`, to fix it, open file `php.ini` (you can find it by doing this: first create a simple PHP file `/var/www/html/phpinfo.php` with content `<?php phpinfo(); ?>` using `sudo vim`. In a browser, open `http://my.public.dns.amazonaws.com/phpinfo.php`, `php.ini` is labeled as `Loaded Configuration File`), locate `;date.timezone =` and change it to `date.timezone = "US/Eastern"`. Restart Apache and MySQL servers by running `sudo service httpd restart;sudo service mysqld restart` and reload `http://my.public.dns.amazonaws.com/webmail/installer`. If there's still any other NOT OK, please fix it before you can click on `NEXT`.
+    * Under `Check environment` you should see several OKs except for a few NOT AVAILABLE which we don't actually care. You might see `date.timezone:  NOT OK(not set)`, to fix it, open file `php.ini` (you can find it by doing this: first create a simple PHP file `/var/www/html/phpinfo.php` with content `<?php phpinfo(); ?>` using `sudo vim`. In a browser, open `http://my.public.dns.amazonaws.com/phpinfo.php`, `php.ini` is then labeled as `Loaded Configuration File`), locate `;date.timezone =` and change it to `date.timezone = "US/Eastern"`. Restart Apache and MySQL servers by running `sudo service httpd restart;sudo service mysqld restart` and then reload `http://my.public.dns.amazonaws.com/webmail/installer`. If there's still any other NOT OK, please fix it before you can click on `NEXT`.
     * Under `Create config`, type `roundcubedb` as the Database server, `usercube` as the Database user name and `usercube` as the Database password, `35.161.155.106` as the IMAP host server, `143` as the default_port, `en_US` as the language. Finally, click on `CREATE CONFIG`, it should show the content of the config file, copy and save it as file `config.inc.php` within the `/var/www/html/webmail/config/` directory.
     * Under `Test config`, you should see all OKs except for two NOT OKs for directories not writable and one NOT OK for DB Schema. For the first two, run `sudo chown -R apache.apache /var/www/html/webmail/temp/` and `sudo chown -R apache.apache /var/www/html/webmail/logs/`, then refresh the page. For the second one, click on 'Initialize databse' to fix it. Type `ec2-user` as Username and `dovecot` as Password for Testing IMAP config, click on `Check login`, and you should be able to see a successful message "IMAP connect:  OK". Fix any problem you might have before proceeding to the next step.
 
@@ -324,11 +322,11 @@ If you want to skip all the troublesome, I've set up the Roundcube on a Amazon L
 
 ###  Installing ePADD on OSX
 
-1. Please download the latest ePADD distribution files (.dmg) from https://github.com/ePADD/epadd/releases/.
+1. Please download the latest ePADD distribution files (.dmg) from https://github.com/ePADD/epadd/releases/. You will need to have Java 8 or later installed on your machine for ePADD to work properly.
 
 2. When you run ePADD for the first time, a directory for the Appraisal Module is created to store working files. When ePADD starts up, it checks this directory and relies upon it to resume earlier work. If the software does not locate this directory, ePADD will create it. The ePADD Appraisal Module directory is located at Macintosh HD/Users/<username>/epadd-appraisal.
 
-3. In order for functionality related to authority reconciliation to perform correctly, you must also separately download the configuration files (epadd-settings.zip), accessible via  https://github.com/ePADD/epadd/releases/. Once downloaded, unzip this file into your user directory (Macintosh HD/Users/<username>/). 
+3. In order for functionality for authority reconciliation to function correctly, you must also separately download the configuration files (epadd-settings.zip), accessible via  https://github.com/ePADD/epadd/releases/. Once downloaded, unzip this file into your user directory (Macintosh HD/Users/<username>/). 
 
 ### Convert Maildir Enron collection to Mbox format
 
@@ -338,7 +336,7 @@ Run the conversion script:
 ```
 It might take a bit, so go grab a cup of coffee...
 
-Note that the script is destructive, in that it alters the original structure of the dataset. This is necessary to get everything in the right `maildir` format so that it can be processed by Python tools (in particular, the script creates `cur/` and `new/` directories, which is part of the expected layout).
+Note that the script is destructive, in that it alters the original structure of the dataset.
 
 ### Import Mbox email collection to ePADD
 
@@ -346,6 +344,6 @@ Note that the script is destructive, in that it alters the original structure of
 
 2. On the page, click on `Import` on the top left.
 
-3. You can actually choose to import from public email accounts or private email accounts by specifying the IMAP Server. But here we choose to import directly from Mbox file. So browser the folder you want to import, give it a email source name, click on `Continue`. 
+3. You can actually choose to import from public email accounts or private email accounts by specifying the IMAP Server. But here we choose to import directly from Mbox file. So browse the folder you want to import, give it a email source name, click on `Continue`. 
 
 4. All the following steps should be straightforward, and you can do all the processes by following the well-written [instructions](https://docs.google.com/document/d/1joUmI8yZEOnFzuWaVN1A5gAEA8UawC-UnKycdcuG5Xc/edit).
