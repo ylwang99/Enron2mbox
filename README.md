@@ -259,29 +259,29 @@ If you want to skip all the troublesome, I've set up the Roundcube on a Amazon L
     
 7. To create a MySQL Database & User:
     * Open the terminal and run the following command to log in to MySQL server (use the MySQL password you have entered during the installation of the LAMP Server):
-    	```
-   		$ mysql -u root -p
-		```
+	```
+	$ mysql -u root -p
+	```
     * Create a database for Roundcube Webmail, for example: `roundcubedb`
-    	```
-    	mysql> create database roundcubedb;
-    	```
+	```
+	mysql> create database roundcubedb;
+	```
     * Create MySQL user for access  Roundcube Webmail, for example: `usercube`
 	```
 	mysql> create user usercube;
 	```
     * Give user `usercube` a password `usercube`:
-		```
-		mysql> set password for 'usercube' = password('usercube');
-		```
+	```
+	mysql> set password for 'usercube' = password('usercube');
+	```
     * Set  privileges usercube to access database roundcubedb:
-		```
-		mysql> grant all privileges on roundcubedb.* to 'usercube' identified by 'usercube';
-		```
+	```
+	mysql> grant all privileges on roundcubedb.* to 'usercube' identified by 'usercube';
+	```
     * Exit from MySQL:
-		```
-		mysql> exit
-		```
+	```
+	mysql> exit
+	```
    
 ### Install Roundcube
 
