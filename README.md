@@ -227,9 +227,9 @@ If you want to skip all the troublesome, I've set up the Roundcube on a Amazon L
     $ sudo yum update -y
     ```
 3. Install the Apache web server, MySQL, and PHP software packages:
-	```
-	$ sudo yum install -y httpd24 php56 mysql55-server php56-mysqlnd php56-mbstring
-	```
+    ```
+    $ sudo yum install -y httpd24 php56 mysql55-server php56-mysqlnd php56-mbstring
+    ```
 4. Start the Apache web server:
     ```
     $ sudo service httpd start
