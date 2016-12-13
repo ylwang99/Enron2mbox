@@ -344,6 +344,6 @@ Note that the script is destructive, in that it alters the original structure of
 
 2. On the page, click on `Import` on the top left.
 
-3. You can actually choose to import from public email accounts or private email accounts by specifying the IMAP Server. But here we choose to import directly from Mbox file. So browse the folder you want to import, give it a email source name, click on `Continue`. 
+3. You can actually choose to import from public email accounts or private email accounts by specifying the IMAP Server. But here we choose to import directly from Mbox file. So browse the folder you want to import (I suggest you import one folder/inbox at a time because processing takes time), give it a email source name, click on `Continue`. 
 
 4. All the following steps should be straightforward, and you can do all the processes by following the well-written [instructions](https://docs.google.com/document/d/1joUmI8yZEOnFzuWaVN1A5gAEA8UawC-UnKycdcuG5Xc/edit).
